@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Update Inventory(For organizations)</h2>
+<form method="POST" class="form-inline my-5">
+    <div class="form-group mb-2">
+        <label for="blood_type" class="sr-only">Blood Type</label>
+        <input type="text" name="blood_type" class="form-control" placeholder="Blood Type" required>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label for="stock_level" class="sr-only">Stock Level</label>
+        <input type="number" name="stock_level" class="form-control" placeholder="Stock Level" required>
+    </div>
+    <button type="submit" class="btn btn-success mb-2">Update Inventory</button>
+</form>
+{% endblock %}

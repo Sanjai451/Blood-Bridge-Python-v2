@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Request Blood</h2>
+    <div class="card mx-auto" style="max-width: 600px;">
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" name="name" required class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="mb-3">
+                    <label for="contact_info" class="form-label">Contact info eg:(email or address)</label>
+                    <input type="text" name="contact_info" required class="form-control" placeholder="Enter Contact Info ">
+                </div>
+                <div class="mb-3">
+                    <label for="blood_type" class="form-label">Blood Type:</label>
+                    <input type="text" name="blood_type" required class="form-control" placeholder="Enter Blood Type">
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity:</label>
+                    <input type="number" name="quantity" required class="form-control" placeholder="Enter Quantity">
+                </div>
+                <div class="mb-3">
+                    <label for="requestor_type" class="form-label">Requestor Type:</label>
+                    <select name="requestor_type" required class="form-select">
+                        <option value="">Select Requestor Type</option>
+                        <option value="acceptor">Acceptor</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Request Blood</button>
+            </form>
+            <div class="mt-3">
+                <a href="{{ url_for('dashboard') }}" class="link-primary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

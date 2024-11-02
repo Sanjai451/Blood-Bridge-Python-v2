@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bridge Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body class="bg-gray-100 px-10">
+
+    <div class="container mx-auto px-4 py-8">
+        <nav class="bg-blue-600 p-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="/" class="text-white text-2xl font-bold">Blood Bridge</a>
+                <ul class="flex space-x-4">
+                    <li>
+                        <a href="{{ url_for('request_blood') }}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md">Request Blood</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('update_inventory') }}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md">Update Inventory</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('donate_blood') }}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md">Donate Blood</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>      
+    </div>
+
+    <h2 class="text-2xl font-semibold mb-4">Recents</h2>
+
+    <div class="container mx-auto mt-10">
+        <h2 class="text-2xl font-semibold mb-4">Blood Requests</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% if blood_requests %}
+                {% for request in blood_requests %}
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <h3 class="text-xl font-bold">{{ request[4] }}</h3>
+                        <h3 class="text-lg font-bold">{{ request[1] }}</h3>
+                        <p class="text-gray-600">Quantity: {{ request[2] }} units</p>
+                        <p class="text-gray-600">Contact: {{ request[3] }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-gray-600">No blood requests available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container mx-auto mt-10">
+        <h2 class="text-2xl font-semibold mb-4">Donors</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% if donors %}
+                {% for donor in donors %}
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <strong class="text-lg">{{ donor[1] }}</strong>
+                        <p><strong>Blood Type:</strong> {{ donor[2] }}</p>
+                        <p><strong>Contact Info:</strong> {{ donor[3] }}</p>
+                        <p><strong>Address:</strong> {{ donor[4] }}</p>
+                        <p class="text-green-600"><strong>Type:</strong> Donor</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-gray-600">No donors available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Inventory Section -->
+    <h3 class="text-2xl font-semibold mt-8">Blood Inventory</h3>
+    <table class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg mt-4">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Blood Type</th>
+                <th class="py-2 px-4 border-b">Stock Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if inventory %}
+                {% for item in inventory %}
+                <tr>
+                    <td class="py-2 px-4 border-b">{{ item[1] }}</td>
+                    <td class="py-2 px-4 border-b">{{ item[2] }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2" class="text-gray-600 text-center">No inventory data available.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+</body>
+</html>
